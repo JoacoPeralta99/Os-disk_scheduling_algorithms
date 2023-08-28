@@ -16,7 +16,7 @@ layout = [[sg.Text('Data entry in the sector:', font='Default 16')]] + \
          [[sg.T(r, size=(4, 1))] + [sg.Input(randint(0, 1000), justification='r', key=(r, c)) for c in range(MAX_COLS)] for r in range(MAX_ROWS)] + \
          [[sg.Text('Administration Methods:', font='Default 16')]] + \
          [[sg.Button('First Come First Served'), sg.Button('Shortest Seek Time First')]] + \
-         [[sg.Button('Scan'), sg.Button('C-Scan'), sg.Button('Stacked Requests'), sg.Button('Exit')]]
+         [[sg.Button('Scan'), sg.Button('C-Scan'), sg.Button('Last In First Out'), sg.Button('Exit')]]
 
 # creacion de la ventana 
 window = sg.Window('Request-Manager_HDD', layout, default_element_size=(12, 1), element_padding=(1, 1), return_keyboard_events=True)
@@ -82,6 +82,6 @@ while True:  # bucle
         table5 = c_scan(ultima_ubicacion, valores)
         sg.popup_scrolled('\n'.join(str(num) for num in table5), title='C-SCAN', font='fixedsys', keep_on_top=True)
 
-    elif event.startswith('Stacked Requests'):
+    elif event.startswith('Last In First Out'):
         table6 = pila(valores)
-        sg.popup_scrolled('Requests:', '\n'.join(str(num) for num in table6), title='STACK', font='fixedsys', keep_on_top=True)
+        sg.popup_scrolled('Stacked Requests:', '\n'.join(str(num) for num in table6), title='FILO', font='fixedsys', keep_on_top=True)
